@@ -1,0 +1,32 @@
+<div class="container">
+    <form>
+      <div class="form-group">
+        <h3 class="text-center">Login</h3>
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <br>
+    </form>
+      Or sign in with
+      <div class="grid-container">
+
+      <form action="/auth/google" method="GET">
+        <button type="submit" id='git' class="btn btn-primary grid-item"><img alt='sign in with google' width="32"
+            height="32" src="/images/google.png"></button>
+      </form>
+      <form action="/auth/github" method="GET">
+        <button type="submit" id='git' class="btn btn-primary grid-item"><img alt='sign in with github' width="32"
+            height="32" src="/images/github.png"></button>
+      </form>
+      <form action="/auth/twitch" method="GET">
+        <button type="submit" id='git' class="btn btn-primary grid-item"><img alt='sign in with twitch' width="32"
+            height="32" src="/images/twitch.png"></button>
+      </form>
+    </div>
+  </div>
