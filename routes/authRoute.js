@@ -32,7 +32,7 @@ router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/auth/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/reminders');
   });
 
 //TWITCH
@@ -46,7 +46,7 @@ router.get("/twitch/callback",
  passport.authenticate("twitch", { failureRedirect: "/auth/login" }),
  function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect("/");
+    res.redirect("/reminders");
 });
 
 //GOOGLE

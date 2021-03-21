@@ -14,6 +14,7 @@ app.use(ejsLayouts);
 
 app.set("view engine", "ejs");
 const passport = require("./middleware/passport");
+const { ensureAuthenticated } = require("./middleware/checkAuth");
 // Middleware for express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,7 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // Routes start here
 
-app.get("/reminders", reminderController.list);
+app.get("/reminders", ensureAuthenticated, reminderController.list);
 
 app.get("/reminder/new", reminderController.new);
 
