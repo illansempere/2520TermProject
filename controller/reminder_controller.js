@@ -1,8 +1,11 @@
 let database = require("../database");
+const { ensureAuthenticated } = require("../middleware/checkAuth");
+const express = require("express");
+const passport = require("../middleware/passport");
 
 let remindersController = {
   list: (req, res) => {
-    res.render("reminder/index", { reminders: database.cindy.reminders });
+    res.render("reminder/index", ensureAuthenticated, { reminders: database.cindy.reminders });
   },
 
   new: (req, res) => {
