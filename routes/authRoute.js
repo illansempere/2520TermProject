@@ -60,7 +60,7 @@ router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/auth/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/reminders');
   });
 
 module.exports = router;
