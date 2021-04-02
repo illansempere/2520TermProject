@@ -9,3 +9,9 @@ Illan Sempere:
 I worked on the following tasks:
 -	Added the update function
 -	Added the delete function
+
+April 2, 2021
+Aidan Christopher:
+-       fixed auth issue
+-       fixed true/false part of each reminder
+-       made reminders unique to each user
