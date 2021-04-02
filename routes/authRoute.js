@@ -11,7 +11,7 @@ router.get("/login", forwardAuthenticated, (req, res) => res.render("login"));
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/dashboard",
+    successRedirect: "/reminders",
     failureRedirect: "/auth/login",
   })
 );

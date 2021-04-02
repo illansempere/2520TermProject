@@ -1,5 +1,4 @@
 let database = require("../database");
-const { ensureAuthenticated } = require("../middleware/checkAuth");
 const express = require("express");
 const passport = require("../middleware/passport");
 

@@ -32,6 +32,10 @@ app.get("/reminder/:id/edit", reminderController.edit);
 
 app.post("/reminder/", reminderController.create);
 
+app.get('/login', (req, res) => {
+  res.redirect('/auth/login')
+})
+
 // Implement this yourself
 app.post("/reminder/update/:id", reminderController.update);
 

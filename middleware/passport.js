@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const TwitchStrategy = require("passport-twitch-new").Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const userController = require("../controller/auth_controller").authController;
+const userController = require("../controller/auth_controller");
 const userModel = require("../models/userModel").userModel;
 const localLogin = new LocalStrategy(
   {
@@ -11,6 +11,7 @@ const localLogin = new LocalStrategy(
     passwordField: "password",
   },
   (email, password, done) => {
+    console.log('!!!!!!!!!!!!!!!!!!!',email,password)
     const user = userController.getUserByEmailIdAndPassword(email, password);
     return user
       ? done(null, user)
