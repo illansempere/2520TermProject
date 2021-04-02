@@ -14,7 +14,7 @@
       <label for="completed">Completed</label>
       <div class="radio">
         <label>
-          <% if (reminderItem.completed == true) { %>
+          <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
             <input type="radio" name="completed" id="true" value="true" checked="checked">
           <% } else { %>
             <input type="radio" name="completed" id="true" value="true">
@@ -24,7 +24,7 @@
       </div>
       <div class="radio">
         <label>
-          <% if (reminderItem.completed == false) { %>
+          <% if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
             <input type="radio" name="completed" id="false" value="false" checked="checked">
           <% } else { %>
             <input type="radio" name="completed" id="false" value="false">
