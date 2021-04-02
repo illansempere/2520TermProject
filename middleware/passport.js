@@ -11,7 +11,6 @@ const localLogin = new LocalStrategy(
     passwordField: "password",
   },
   (email, password, done) => {
-    console.log('!!!!!!!!!!!!!!!!!!!',email,password)
     const user = userController.getUserByEmailIdAndPassword(email, password);
     return user
       ? done(null, user)
@@ -40,7 +39,7 @@ const GithubLogin = new GitHubStrategy({
   callbackURL: "http://localhost:3001/auth/github/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  let user = userController.getUserByGithubIdOrCreate(profile)
+  let user = userController.authController.getUserByGithubIdOrCreate(profile)
   return cb(null, user);
 }
 )
@@ -52,7 +51,7 @@ const TwitchLogin = new TwitchStrategy({
   scope: "user_read"
 },
 function(token, tokenSecret, profile, cb) {
-  let user = userController.getUserByTwitchIdOrCreate(profile)
+  let user = userController.authController.getUserByTwitchIdOrCreate(profile)
   return cb(null, user);
 }
 );
@@ -63,7 +62,7 @@ const GoogleLogin = new GoogleStrategy({
   callbackURL: "http://localhost:3001/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  let user = userController.getUserByGoogleIdOrCreate(profile)
+  let user = userController.authController.getUserByGoogleIdOrCreate(profile)
   return cb(null, user);
 }
 )
