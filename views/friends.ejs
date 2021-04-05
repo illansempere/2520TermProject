@@ -1,0 +1,21 @@
+<div class="container">
+    <h1 class="page-header">Friends</h1>
+
+  <ul class="list-group">
+    <strong><% for x in database if user == 'friends'{ %> <%= database['name'] %> <% }} %></strong> 
+    <% reminders.forEach(function (reminderItem) { %>
+      <li class="list-group-item">
+        <strong><%= reminderItem.title %>: </strong>
+        <%= reminderItem.description %>
+        || Completed:
+        <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
+          <span class="badge badge-success">True</span>
+        <% } else if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
+          <span class="badge badge-danger">False</span>
+        <% } %>
+        <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
+      </li>
+    <% }) %>
+  </ul>
+  
+  </div>
