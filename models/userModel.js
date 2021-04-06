@@ -72,6 +72,14 @@ const userModel = {
         method:u_method
       }
       )
+  },
+  addfriendbyid: (userid,newfriendid) => {
+    for (user in database){
+      if (database[user].id == parseInt(userid)){
+        database[user].friends.push(parseInt(newfriendid))
+        break
+      }
+    }
   }
 };
 

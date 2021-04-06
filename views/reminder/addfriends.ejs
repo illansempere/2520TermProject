@@ -3,8 +3,8 @@
     <p>Life is much more fun with friends</p>
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users..." title="Type in a name">
     <ul id="myUL">
-        <% for (userb in userdatabase){ if (userdatabase[userb].id != user.id) { if (!currentuserfriends.includes(userdatabase[userb].id)){%>
-            <li><%= userdatabase[userb].name %> </li>
+        <% for (userb in userdatabase){ if (userdatabase[userb].id != user.id) { if (!currentuserfriends.includes(userdatabase[userb].id)){%><% let link = '/reminder/addfriendsid?nfid='+String(userdatabase[userb].id) %> 
+            <li><a href="<%= link %>"><%= userdatabase[userb].name %></a></li>
             <% }}} %>   
       </ul>
       

@@ -2,6 +2,7 @@ let database = require("../database");
 const express = require("express");
 const passport = require("../middleware/passport");
 let userdatabase = require("../models/userModel").database;
+let userModel = require("../models/userModel").userModel;
 
 let remindersController = {
   list: (req, res) => {
@@ -144,14 +145,21 @@ let remindersController = {
   },
   friends: (req, res) => {
     let currentuser = req.user.id
-    let currentuserfriends = req.user.friends
+    let currentuserfriends = []
+    for (user in userdatabase){
+      if (userdatabase[user].id == req.user.id){
+        currentuserfriends = userdatabase[user].friends
+        break
+      }
+    }
+
+    
     let friendsposts = {}
 
     for (id in currentuserfriends) {
       // console.log('ID:', id, 'Database:', database,'currentuserfriends:',currentuserfriends)
       friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
     }
-    console.log('friendsposts',friendsposts)
     let exists = false
   
     for (i in database) {
@@ -167,14 +175,20 @@ let remindersController = {
   },
   addfriends: (req, res) => {
     let currentuser = req.user.id
-    let currentuserfriends = req.user.friends
+    let currentuserfriends = []
+
+    for (user in userdatabase){
+      if (userdatabase[user].id == req.user.id){
+        currentuserfriends = userdatabase[user].friends
+        break
+      }
+    }
     let friendsposts = {}
 
     for (id in currentuserfriends) {
       // console.log('ID:', id, 'Database:', database,'currentuserfriends:',currentuserfriends)
       friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
     }
-    console.log('friendsposts',friendsposts)
     let exists = false
   
     for (i in database) {
@@ -185,9 +199,16 @@ let remindersController = {
     if (exists == false) {
       database[currentuser] = { reminders: [] }
     }
-
+    console.log(currentuserfriends)
     res.render("reminder/addfriends", { reminders: database[currentuser].reminders, currentuserfriends, userdatabase, user:req.user });
   },
+  addfriendspost: (req, res) => {
+    let nfid = req.query.nfid
+    
+    userModel.addfriendbyid(req.user.id,nfid)
+
+    res.redirect('/reminder/friends')
+  }
 };
 
 module.exports = remindersController;
