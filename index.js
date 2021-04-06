@@ -43,6 +43,8 @@ app.get("/reminders", ensureAuthenticated, reminderController.list);
 
 app.get("/reminder/friends", reminderController.friends);
 
+app.get("/reminder/addfriends", reminderController.addfriends);
+
 app.get("/reminder/new", ensureAuthenticated, reminderController.new);
 
 app.get("/reminder/:id", reminderController.listOne);

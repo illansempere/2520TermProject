@@ -21,6 +21,7 @@ Aidan Christopher:
 -       Added a 'friends' item to the user database, each user has default 0 friends
 -       worked with a js and ejs to list out the user's friends and their reminders on a separate page (accessible by the navbar)
 Illan Sempere:
+-       Created the layout for the friends.ejs file
 -       Added possibility to add a date to a task
 -       Added tags to the reminders
 -       Added subtasks to the reminders

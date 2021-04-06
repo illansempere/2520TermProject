@@ -165,6 +165,29 @@ let remindersController = {
 
     res.render("reminder/friends", { reminders: database[currentuser].reminders, friendsposts, userdatabase });
   },
+  addfriends: (req, res) => {
+    let currentuser = req.user.id
+    let currentuserfriends = req.user.friends
+    let friendsposts = {}
+
+    for (id in currentuserfriends) {
+      // console.log('ID:', id, 'Database:', database,'currentuserfriends:',currentuserfriends)
+      friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
+    }
+    console.log('friendsposts',friendsposts)
+    let exists = false
+  
+    for (i in database) {
+      if (i == currentuser) {
+        exists = true
+      }
+    }
+    if (exists == false) {
+      database[currentuser] = { reminders: [] }
+    }
+
+    res.render("reminder/addfriends", { reminders: database[currentuser].reminders, friendsposts, userdatabase });
+  },
 };
 
 module.exports = remindersController;
