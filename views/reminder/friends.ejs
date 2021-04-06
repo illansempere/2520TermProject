@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 class="page-header">Friends</h1><a href="/reminders">add friends</a>
+
+  <ul class="list-group">
+    <% for (i in friendsposts){ for (a in userdatabase){ if (userdatabase[a].id == i){%> <h4><%= userdatabase[a].name %></h4> <% }} friendsposts[i].forEach(function (reminderItem) { %>
+      <li class="list-group-item">
+        <strong><%= reminderItem.title %>: </strong>
+        <%= reminderItem.description %>
+        || Completed:
+        <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
+          <span class="badge badge-success">True</span>
+        <% } else if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
+          <span class="badge badge-danger">False</span>
+        <% } %>
+      </li>
+    <% })} %>
+  </ul>
+  
+  </div>
