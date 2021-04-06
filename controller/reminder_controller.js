@@ -1,20 +1,21 @@
 let database = require("../database");
 const express = require("express");
 const passport = require("../middleware/passport");
+let userdatabase = require("../models/userModel").database;
 
 let remindersController = {
   list: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
-    
+
     res.render("reminder/index", { reminders: database[currentuser].reminders });
   },
 
@@ -25,13 +26,13 @@ let remindersController = {
   listOne: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
 
     let reminderToFind = req.params.id;
@@ -48,13 +49,13 @@ let remindersController = {
   create: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
 
     let reminder = {
@@ -70,13 +71,13 @@ let remindersController = {
   edit: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
 
     let reminderToFind = req.params.id;
@@ -89,13 +90,13 @@ let remindersController = {
   update: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
 
     let reminderToFind = req.params.id;
@@ -118,13 +119,13 @@ let remindersController = {
   delete: (req, res) => {
     let currentuser = req.user.id
     let exists = false
-    for (i in database){
-      if (i == currentuser){
+    for (i in database) {
+      if (i == currentuser) {
         exists = true
       }
     }
     if (exists == false) {
-      database[currentuser] = {reminders:[]}
+      database[currentuser] = { reminders: [] }
     }
 
     let reminderToFind = req.params.id;
@@ -134,6 +135,29 @@ let remindersController = {
     let del = database[currentuser].reminders.indexOf(searchResult)
     database[currentuser].reminders.splice(del);
     res.redirect("/reminders");
+  },
+  friends: (req, res) => {
+    let currentuser = req.user.id
+    let currentuserfriends = req.user.friends
+    let friendsposts = {}
+
+    for (id in currentuserfriends) {
+      // console.log('ID:', id, 'Database:', database,'currentuserfriends:',currentuserfriends)
+      friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
+    }
+    console.log('friendsposts',friendsposts)
+    let exists = false
+  
+    for (i in database) {
+      if (i == currentuser) {
+        exists = true
+      }
+    }
+    if (exists == false) {
+      database[currentuser] = { reminders: [] }
+    }
+
+    res.render("reminder/friends", { reminders: database[currentuser].reminders, friendsposts, userdatabase });
   },
 };
 

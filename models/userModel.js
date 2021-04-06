@@ -4,35 +4,40 @@ const database = [
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
-    method: 'local'
+    method: 'local',
+    friends: []
   },
   {
     id: 2,
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
-    method: 'local'
+    method: 'local',
+    friends: []
   },
   {
     id: 3,
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
-    method: 'local'
+    method: 'local',
+    friends: []
   },
   {
     id: 4,
     name: "Aidan Christopher",
     email: "aidan.r.christopher@gmail.com",
     password: "aidan123!",
-    method: 'local'
+    method: 'local',
+    friends: [5,2,1]
   },
   {
     id: 5,
     name: "Illan Sempere",
     email: "illan.sempere@gmail.com",
     password: "illan123!",
-    method: 'local'
+    method: 'local',
+    friends: []
   },
 ];
 

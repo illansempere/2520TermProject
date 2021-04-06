@@ -41,6 +41,8 @@ app.use(passport.session());
 
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 
+app.get("/reminder/friends", reminderController.friends);
+
 app.get("/reminder/new", ensureAuthenticated, reminderController.new);
 
 app.get("/reminder/:id", reminderController.listOne);
@@ -48,6 +50,8 @@ app.get("/reminder/:id", reminderController.listOne);
 app.get("/reminder/:id/edit", reminderController.edit);
 
 app.post("/reminder/", reminderController.create);
+
+
 
 app.get('/login', (req, res) => {
   res.redirect('/auth/login')
