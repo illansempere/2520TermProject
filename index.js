@@ -41,9 +41,9 @@ app.use(passport.session());
 
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 
-app.get("/reminder/friends", reminderController.friends);
+app.get("/reminder/friends", ensureAuthenticated, reminderController.friends);
 
-app.get("/reminder/addfriends", reminderController.addfriends);
+app.get("/reminder/addfriends", ensureAuthenticated, reminderController.addfriends);
 
 app.get("/reminder/new", ensureAuthenticated, reminderController.new);
 

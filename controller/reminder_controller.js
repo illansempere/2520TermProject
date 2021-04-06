@@ -186,7 +186,7 @@ let remindersController = {
       database[currentuser] = { reminders: [] }
     }
 
-    res.render("reminder/addfriends", { reminders: database[currentuser].reminders, friendsposts, userdatabase });
+    res.render("reminder/addfriends", { reminders: database[currentuser].reminders, currentuserfriends, userdatabase, user:req.user });
   },
 };
 

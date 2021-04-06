@@ -1,4 +1,29 @@
 <div class="container">
     <h1 class="page-header">Add Friends!</h1>
     <p>Life is much more fun with friends</p>
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for users..." title="Type in a name">
+    <ul id="myUL">
+        <% for (userb in userdatabase){ if (userdatabase[userb].id != user.id) { if (!currentuserfriends.includes(userdatabase[userb].id)){%>
+            <li><%= userdatabase[userb].name %> </li>
+            <% }}} %>   
+      </ul>
+      
+      <script>
+      function myFunction() {
+          var input, filter, ul, li, a, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          ul = document.getElementById("myUL");
+          li = ul.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+              a = li[i].getElementsByTagName("a")[0];
+              txtValue = a.textContent || a.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+              } else {
+                  li[i].style.display = "none";
+              }
+          }
+      }
+      </script>
 </div>
