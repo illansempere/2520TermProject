@@ -12,6 +12,12 @@
       <% } else if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
         <span class="badge badge-danger">False</span>
       <% } %>
+      || Due Date:
+      <% if (reminderItem.date) { %>
+        <%= reminderItem.date %>
+      <% } else { %>
+        None 
+      <% } %>
       <a class="pull-right" href=<%= "/reminder/" + reminderItem.id %>>View</a>
     </li>
   <% }) %>

@@ -1,4 +1,4 @@
-March 21, 2021 ? (when sprint is finished):
+March 21, 2021:
 Aidan Christopher:
 -	Added the local login method
 -	Added 3 OAuth methods
@@ -20,3 +20,7 @@ April 5th, 2021
 Aidan Christopher:
 -       Added a 'friends' item to the user database, each user has default 0 friends
 -       worked with a js and ejs to list out the user's friends and their reminders on a separate page (accessible by the navbar)
+Illan Sempere:
+-       Added possibility to add a date to a task
+-       Added tags to the reminders
+-       Added subtasks to the reminders

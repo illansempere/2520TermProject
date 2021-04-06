@@ -61,7 +61,10 @@ let remindersController = {
     let reminder = {
       id: database[currentuser].reminders.length + 1,
       title: req.body.title,
+      date: req.body.date,
       description: req.body.description,
+      subtasks: req.body.subtasks,
+      tags: req.body.tags,
       completed: false,
     };
     database[currentuser].reminders.push(reminder);
@@ -103,7 +106,10 @@ let remindersController = {
     let updatedreminder = {
       id: reminderToFind,
       title: req.body.title,
+      date: req.body.date,
       description: req.body.description,
+      subtasks: req.body.subtasks,
+      tags: req.body.tags,
       completed: req.body.completed,
     };
     let searchResult = database[currentuser].reminders.find(function (reminder) {

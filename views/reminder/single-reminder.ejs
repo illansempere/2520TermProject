@@ -5,11 +5,22 @@
       <li class="list-group-item">
         <h3><strong><%= reminderItem.title %>: </strong></h3>
         <h4><%= reminderItem.description %></h4>
+        <% String(reminderItem).replace(' ', '<br>') %><h4> To do list: <br>
+        <ul>
+          <li><%= reminderItem.subtasks %></li>
+        </ul> </h4>
+        <h4> Due Date: 
+        <% if (reminderItem.date) { %>
+          <%= reminderItem.date %>
+        <% } else { %>
+          None 
+        <% } %></h4>
+        <h4> Tags: <%= reminderItem.tags %></h4>
         <h4>Completed:
-          <% if (reminderItem.completed == true) { %>
-            <span class="label label-success">True</span>
-          <% } else if (reminderItem.completed == false) { %>
-            <span class="label label-danger">False</span>
+          <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
+            <span class="badge badge-success">True</span>
+          <% } else if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
+            <span class="badge badge-danger">False</span>
           <% } %>
         </h4>
 
