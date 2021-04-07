@@ -25,3 +25,8 @@ Illan Sempere:
 -       Added possibility to add a date to a task
 -       Added tags to the reminders
 -       Added subtasks to the reminders
+
+April 6th, 2021
+Aidan Christopher:
+-       Created addfriends.ejs, a page in which to search for users to add to your friends list
+-       Finished the functionality of adding users to your friends list, still have to do the search part
