@@ -1,8 +1,8 @@
 March 21, 2021  
 Aidan Christopher:
--	Added the local login method
--	Added 3 OAuth methods: Google, Github, and Twitch
--	/reminders now needs authentication before being able to be accessed
+-       Added the local login method
+-       Added 3 OAuth methods: Google, Github, and Twitch
+-       /reminders now needs authentication before being able to be accessed
 Illan Sempere:
 -	Added the update function
 -	Added the delete function
