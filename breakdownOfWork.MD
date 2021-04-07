@@ -4,8 +4,8 @@ Aidan Christopher:
 -       Added 3 OAuth methods: Google, Github, and Twitch
 -       /reminders now needs authentication before being able to be accessed
 Illan Sempere:
--	Added the update function
--	Added the delete function
+-       Added the update function
+-       Added the delete function
 
 April 2, 2021  
 Aidan Christopher:
