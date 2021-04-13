@@ -29,4 +29,5 @@ Aidan Christopher:
 -       Finished the functionality of adding users to your friends list, still have to do the search part  
 April 13th, 2021  
 Aidan Christopher:  
--       fixed errors present in the demonstration meeting with armaan
+-       fixed errors present in the demonstration meeting with armaan  
+-       fixed the error where deleting one reminder would delete them all
