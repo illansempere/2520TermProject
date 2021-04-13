@@ -4,7 +4,15 @@ const express = require("express");
 const passport = require("../middleware/passport");
 let userdatabase = require("../models/userModel").database;
 let userModel = require("../models/userModel").userModel;
-const request = require('request');
+const request = require('request-promise');
+
+async function getWeather(){
+  var x;
+  await request('http://api.openweathermap.org/data/2.5/weather?q=nanaimo&appid=ad9c706cc1a14ac190bd66cb6220a124', function (error, response, body) {
+      x = JSON.parse(body)
+    })
+    return x
+}
 
 let remindersController = {
   list: (req, res) => {
@@ -18,15 +26,9 @@ let remindersController = {
     if (exists == false) {
       AddUser(currentuser)
     }
-    let x = []
-    x.push(request('http://api.openweathermap.org/data/2.5/weather?q=nanaimo&appid=ad9c706cc1a14ac190bd66cb6220a124', function (error, response, body) {
-      console.error('error:', error); // Print the error if one occurred
-      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-      console.log('body:', body); // Print the HTML for the Google homepage.
-      return body
-    }))
-    console.log(x[0])
-    res.render("reminder/index", { reminders: database[currentuser].reminders, weather:x[0] });
+    
+    res.render("reminder/index", { reminders: database[currentuser].reminders });
+    
   },
 
   new: (req, res) => {
@@ -50,7 +52,9 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     if (searchResult != undefined) {
-      res.render("reminder/single-reminder", { reminderItem: searchResult });
+      let x = getWeather().then(function(result) {
+        res.render("reminder/single-reminder", { reminderItem: searchResult, weather:result });
+      })
     } else {
       res.render("reminder/index", { reminders: database[currentuser].reminders });
     }
@@ -149,9 +153,7 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     let del = database[currentuser].reminders.indexOf(searchResult)
-    console.log('!!!!!!!!!!!!', database)
     database[currentuser].reminders.splice(del, 1);
-    console.log('!!!!!!!!!!!!', database)
     res.redirect("/reminders");
   },
   friends: (req, res) => {
