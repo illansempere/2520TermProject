@@ -141,7 +141,9 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     let del = database[currentuser].reminders.indexOf(searchResult)
-    database[currentuser].reminders.splice(del);
+    console.log('!!!!!!!!!!!!',database)
+    database[currentuser].reminders.splice(del,1);
+    console.log('!!!!!!!!!!!!',database)
     res.redirect("/reminders");
   },
   friends: (req, res) => {

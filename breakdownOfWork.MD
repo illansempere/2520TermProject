@@ -26,4 +26,7 @@ Illan Sempere:
 April 6th, 2021  
 Aidan Christopher:
 -       Created addfriends.ejs, a page in which to search for users to add to your friends list
--       Finished the functionality of adding users to your friends list, still have to do the search part
+-       Finished the functionality of adding users to your friends list, still have to do the search part  
+April 13th, 2021  
+Aidan Christopher:  
+-       fixed errors present in the demonstration meeting with armaan
