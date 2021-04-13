@@ -7,9 +7,8 @@ const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
 const authRoute = require("./routes/authRoute");
 const passport = require("./middleware/passport");
-const { ensureAuthenticated } = require("./middleware/checkAuth");
+const { ensureAuthenticated, forwardAuthenticated } = require("./middleware/checkAuth");
 
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -38,6 +37,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 // Routes start here
+
+app.get("/", forwardAuthenticated, function(req,res) {
+  res.sendFile('index.html');
+});
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/reminders", ensureAuthenticated, reminderController.list);
 

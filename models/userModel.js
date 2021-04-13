@@ -1,6 +1,6 @@
 const database = [
   {
-    id: 1,
+    id: '1',
     name: "Jimmy Smith",
     email: "jimmy123@gmail.com",
     password: "jimmy123!",
@@ -8,7 +8,7 @@ const database = [
     friends: []
   },
   {
-    id: 2,
+    id: '2',
     name: "Johnny Doe",
     email: "johnny123@gmail.com",
     password: "johnny123!",
@@ -16,7 +16,7 @@ const database = [
     friends: []
   },
   {
-    id: 3,
+    id: '3',
     name: "Jonathan Chen",
     email: "jonathan123@gmail.com",
     password: "jonathan123!",
@@ -24,15 +24,15 @@ const database = [
     friends: []
   },
   {
-    id: 4,
+    id: '4',
     name: "Aidan Christopher",
     email: "aidan.r.christopher@gmail.com",
     password: "aidan123!",
     method: 'local',
-    friends: [5,2,1]
+    friends: ['5','2','1']
   },
   {
-    id: 5,
+    id: '5',
     name: "Illan Sempere",
     email: "illan.sempere@gmail.com",
     password: "illan123!",
@@ -69,14 +69,15 @@ const userModel = {
         name:u_name,
         email:null,
         password:null,
-        method:u_method
+        method:u_method,
+        friends: []
       }
       )
   },
   addfriendbyid: (userid,newfriendid) => {
     for (user in database){
-      if (database[user].id == parseInt(userid)){
-        database[user].friends.push(parseInt(newfriendid))
+      if (database[user].id == userid){
+        database[user].friends.push(newfriendid)
         break
       }
     }

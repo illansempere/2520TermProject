@@ -1,4 +1,5 @@
-let database = require("../database");
+let database = require("../database").Database;
+let AddUser = require("../database").AddUser;
 const express = require("express");
 const passport = require("../middleware/passport");
 let userdatabase = require("../models/userModel").database;
@@ -14,7 +15,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     res.render("reminder/index", { reminders: database[currentuser].reminders });
@@ -33,7 +34,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     let reminderToFind = req.params.id;
@@ -56,7 +57,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     let reminder = {
@@ -81,7 +82,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     let reminderToFind = req.params.id;
@@ -100,7 +101,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     let reminderToFind = req.params.id;
@@ -132,7 +133,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     let reminderToFind = req.params.id;
@@ -155,7 +156,7 @@ let remindersController = {
 
     
     let friendsposts = {}
-
+    console.log(currentuserfriends)
     for (id in currentuserfriends) {
       // console.log('ID:', id, 'Database:', database,'currentuserfriends:',currentuserfriends)
       friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
@@ -168,7 +169,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
 
     res.render("reminder/friends", { reminders: database[currentuser].reminders, friendsposts, userdatabase });
@@ -197,7 +198,7 @@ let remindersController = {
       }
     }
     if (exists == false) {
-      database[currentuser] = { reminders: [] }
+      AddUser(currentuser)
     }
     console.log(currentuserfriends)
     res.render("reminder/addfriends", { reminders: database[currentuser].reminders, currentuserfriends, userdatabase, user:req.user });

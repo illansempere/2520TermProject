@@ -9,7 +9,7 @@ module.exports = {
     if (!req.isAuthenticated()) {
       return next();
     }
-    res.redirect("/auth/login");
+    res.redirect("/reminders");
     
   },
 };

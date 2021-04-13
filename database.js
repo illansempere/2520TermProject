@@ -22,4 +22,9 @@ let Database = {
     },
 }
 
-module.exports = Database;
+function AddUser(id){
+    Database[id] = {reminders: []}
+    console.log('!!!!SUCCESS!!!\n',Database)
+}
+
+module.exports = {Database, AddUser};
