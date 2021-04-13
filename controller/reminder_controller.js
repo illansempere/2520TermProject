@@ -4,6 +4,7 @@ const express = require("express");
 const passport = require("../middleware/passport");
 let userdatabase = require("../models/userModel").database;
 let userModel = require("../models/userModel").userModel;
+const request = require('request');
 
 let remindersController = {
   list: (req, res) => {
@@ -17,8 +18,15 @@ let remindersController = {
     if (exists == false) {
       AddUser(currentuser)
     }
-
-    res.render("reminder/index", { reminders: database[currentuser].reminders });
+    let x = []
+    x.push(request('http://api.openweathermap.org/data/2.5/weather?q=nanaimo&appid=ad9c706cc1a14ac190bd66cb6220a124', function (error, response, body) {
+      console.error('error:', error); // Print the error if one occurred
+      console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+      console.log('body:', body); // Print the HTML for the Google homepage.
+      return body
+    }))
+    console.log(x[0])
+    res.render("reminder/index", { reminders: database[currentuser].reminders, weather:x[0] });
   },
 
   new: (req, res) => {
@@ -141,22 +149,22 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     let del = database[currentuser].reminders.indexOf(searchResult)
-    console.log('!!!!!!!!!!!!',database)
-    database[currentuser].reminders.splice(del,1);
-    console.log('!!!!!!!!!!!!',database)
+    console.log('!!!!!!!!!!!!', database)
+    database[currentuser].reminders.splice(del, 1);
+    console.log('!!!!!!!!!!!!', database)
     res.redirect("/reminders");
   },
   friends: (req, res) => {
     let currentuser = req.user.id
     let currentuserfriends = []
-    for (user in userdatabase){
-      if (userdatabase[user].id == req.user.id){
+    for (user in userdatabase) {
+      if (userdatabase[user].id == req.user.id) {
         currentuserfriends = userdatabase[user].friends
         break
       }
     }
 
-    
+
     let friendsposts = {}
     console.log(currentuserfriends)
     for (id in currentuserfriends) {
@@ -164,7 +172,7 @@ let remindersController = {
       friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
     }
     let exists = false
-  
+
     for (i in database) {
       if (i == currentuser) {
         exists = true
@@ -180,8 +188,8 @@ let remindersController = {
     let currentuser = req.user.id
     let currentuserfriends = []
 
-    for (user in userdatabase){
-      if (userdatabase[user].id == req.user.id){
+    for (user in userdatabase) {
+      if (userdatabase[user].id == req.user.id) {
         currentuserfriends = userdatabase[user].friends
         break
       }
@@ -193,7 +201,7 @@ let remindersController = {
       friendsposts[currentuserfriends[id]] = database[currentuserfriends[id]].reminders
     }
     let exists = false
-  
+
     for (i in database) {
       if (i == currentuser) {
         exists = true
@@ -203,12 +211,12 @@ let remindersController = {
       AddUser(currentuser)
     }
     console.log(currentuserfriends)
-    res.render("reminder/addfriends", { reminders: database[currentuser].reminders, currentuserfriends, userdatabase, user:req.user });
+    res.render("reminder/addfriends", { reminders: database[currentuser].reminders, currentuserfriends, userdatabase, user: req.user });
   },
   addfriendspost: (req, res) => {
     let nfid = req.query.nfid
-    
-    userModel.addfriendbyid(req.user.id,nfid)
+
+    userModel.addfriendbyid(req.user.id, nfid)
 
     res.redirect('/reminder/friends')
   }
