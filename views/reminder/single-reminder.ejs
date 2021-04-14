@@ -16,6 +16,13 @@
           None 
         <% } %></h4>
         <h4> Tags: <%= reminderItem.tags %></h4>
+        <% if (reminderItem.locationbool == 'true'){ %> 
+        <h4>Location:</h4>
+        <p>&emsp;Address: <%= reminderItem.location.address %></p>
+        <p>&emsp;City: <%= reminderItem.location.city %></p>
+        <p>&emsp;State/Province: <%= reminderItem.location.stateprovince %></p>
+        <p>&emsp;Country: <%= reminderItem.location.country %></p>
+        <% } %> 
         <h4><%= weather %></h4>
         <h4>Completed:
           <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
