@@ -32,3 +32,4 @@ Aidan Christopher:
 -       fixed errors present in the demonstration meeting with armaan  
 -       fixed the error where deleting one reminder would delete them all
 -       Added the ability to use the weather API, will apply it to reminders later
+-       Added the address section to the reminder
