@@ -33,3 +33,7 @@ Aidan Christopher:
 -       fixed the error where deleting one reminder would delete them all
 -       Added the ability to use the weather API, will apply it to reminders later
 -       Added the address section to the reminder
+April 16th, 2021  
+Aidan Christopher:   
+-       finished the map api
+-       used the map api and the weather api accessible while viewing a single reminder 
