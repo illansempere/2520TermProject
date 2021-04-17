@@ -7,9 +7,9 @@ let userModel = require("../models/userModel").userModel;
 const request = require('request-promise');
 // const {Client} = require("@googlemaps/google-maps-services-js");
 
-async function getWeather(){
+async function getWeather(city){
   var x;
-  await request('http://api.openweathermap.org/data/2.5/weather?q=nanaimo&appid=ad9c706cc1a14ac190bd66cb6220a124', function (error, response, body) {
+  await request('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=ad9c706cc1a14ac190bd66cb6220a124&units=metric', function (error, response, body) {
       x = JSON.parse(body)
     })
     return x
@@ -68,7 +68,8 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     if (searchResult != undefined) {
-      let x = getWeather().then(function(result) {
+      let x = getWeather(searchResult.location.city).then(function(result) {
+        console.log(result)
         res.render("reminder/single-reminder", { reminderItem: searchResult, weather:result });
       })
     } else {

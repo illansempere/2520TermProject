@@ -138,3 +138,8 @@ footer.footer {
   display: grid;
   grid-template-columns: 64px 64px 64px ;
 }
+#weathermap {
+  display: grid;
+  
+  grid-template-columns: .9fr auto;
+}

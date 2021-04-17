@@ -1,44 +1,102 @@
 <div class="container">
   <h1 class="page-header">Reminders</h1>
 
-    <ul class="list-group">
-      <li class="list-group-item">
-        <h3><strong><%= reminderItem.title %>: </strong></h3>
-        <h4><%= reminderItem.description %></h4>
-        <% String(reminderItem).replace(' ', '<br>') %><h4> To do list: <br>
-        <ul>
-          <li><%= reminderItem.subtasks %></li>
-        </ul> </h4>
-        <h4> Due Date: 
-        <% if (reminderItem.date) { %>
-          <%= reminderItem.date %>
-        <% } else { %>
-          None 
-        <% } %></h4>
-        <h4> Tags: <%= reminderItem.tags %></h4>
-        <% if (reminderItem.locationbool == 'true'){ %> 
-        <h4>Location:</h4>
-        <p>&emsp;Address: <%= reminderItem.location.address %></p>
-        <p>&emsp;City: <%= reminderItem.location.city %></p>
-        <p>&emsp;State/Province: <%= reminderItem.location.stateprovince %></p>
-        <p>&emsp;Country: <%= reminderItem.location.country %></p>
-        <% } %> 
-        <h4><%= weather %></h4>
-        <h4>Completed:
-          <% if (reminderItem.completed == true || reminderItem.completed == 'true') { %>
-            <span class="badge badge-success">True</span>
-          <% } else if (reminderItem.completed == false || reminderItem.completed == 'false') { %>
-            <span class="badge badge-danger">False</span>
-          <% } %>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h3><strong>
+          <%= reminderItem.title %>:
+        </strong></h3>
+      <h4>
+        <%= reminderItem.description %>
+      </h4>
+      <% String(reminderItem).replace(' ', ' <br>') %><h4> To do list: <br>
+          <ul>
+            <li>
+              <%= reminderItem.subtasks %>
+            </li>
+          </ul>
         </h4>
+        <h4> Due Date:
+          <% if (reminderItem.date) { %>
+            <%= reminderItem.date %>
+              <% } else { %>
+                None
+                <% } %>
+        </h4>
+        <h4> Tags: <%= reminderItem.tags %>
+        </h4>
+        <% if (reminderItem.locationbool=='true' ){ %>
+          <h4>Location:</h4>
+          <p>&emsp;Address: <%= reminderItem.location.address %>
+          </p>
+          <p>&emsp;City: <%= reminderItem.location.city %>
+          </p>
+          <p>&emsp;State/Province: <%= reminderItem.location.stateprovince %>
+          </p>
+          <p>&emsp;Country: <%= reminderItem.location.country %>
+          </p>
+          <div id="weathermap">
+          <div>
+            <h4>Weather:
 
-        <a class="btn btn-warning" href=<%= "/reminder/" + reminderItem.id + "/edit" %>>Edit</a>
+            </h4>
+            <p>
+              The weather in <%= reminderItem.location.city %> is <%= weather.weather[0].main %>
+            </p>
+            <p>
+              The current temparature is <%= weather.main.temp %>°C, but it feels like <%= weather.main.feels_like %>°C
+            </p>
+            <p>The low for today is <%= weather.main.temp_min %>°C, and the high is <%= weather.main.temp_max %>°C
+            </p>
+            <p></p>
+          </div><div>
+          <h4>City Map:
 
-        <form class="deleteForm "method="POST" action=<%= "/reminder/delete/" + reminderItem.id %>>
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+          </h4>
+          <div id="map" style="height: 300px; width: 700px;"></div>
+        </div>
+        </div>
+          <% } %>
+            <h4>Completed:
+              <% if (reminderItem.completed==true || reminderItem.completed=='true' ) { %>
+                <span class="badge badge-success">True</span>
+                <% } else if (reminderItem.completed==false || reminderItem.completed=='false' ) { %>
+                  <span class="badge badge-danger">False</span>
+                  <% } %>
+            </h4>
 
-      </li>
-    </ul>
+            <a class="btn btn-warning" href=<%="/reminder/" + reminderItem.id + "/edit" %>>Edit</a>
+
+            <form class="deleteForm " method="POST" action=<%="/reminder/delete/" + reminderItem.id %>>
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <div style="display: none;">
+              <p id="lon">
+                <%= weather.coord.lon %>
+              </p>
+              <p id="lat">
+                <%= weather.coord.lat %>
+              </p>
+            </div>
+    </li>
+  </ul>
 
 </div>
+<script>
+  function initMap() {
+    const coords = { lat: parseFloat(document.getElementById("lat").innerHTML), lng: parseFloat(document.getElementById("lon").innerHTML) };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 10,
+      center: coords,
+    });
+    const marker = new google.maps.Marker({
+      position: coords,
+      map: map,
+    });
+    console.log('Lon:', coords.lng, '\nLat:', coords.lat)
+  }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6tUafSWRdbrY4QTcn7TW40HyZ6R1CMaY&callback=initMap&libraries=&v=weekly">
+
+  </script>
