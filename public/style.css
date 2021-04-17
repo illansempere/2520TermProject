@@ -141,5 +141,5 @@ footer.footer {
 #weathermap {
   display: grid;
   
-  grid-template-columns: .9fr auto;
+  grid-template-columns: auto auto;
 }
