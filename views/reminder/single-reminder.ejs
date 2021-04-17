@@ -11,7 +11,7 @@
       </h4>
       <h4> To do list: <br></h4>
         <ul>
-          <h5><%- reminderItem.subtasks %></h5>
+          <h5><%- reminderItem.subtasks %></h5><br>
         </ul>
         <h4> Due Date:
         <% if (reminderItem.date) { %>
@@ -38,20 +38,24 @@
             <h4>Weather:
 
             </h4>
+            <% let zoom = 12; if (reminderItem.location.city != ''){ %> 
             <p>
-              The weather in <%= reminderItem.location.city %> is <%= weather.weather[0].main %>
+              The state of weather in <%= reminderItem.location.city %> is <%= weather.weather[0].main %>
             </p>
             <p>
               The current temparature is <%= weather.main.temp %>°C, but it feels like <%= weather.main.feels_like %>°C
             </p>
             <p>The low for today is <%= weather.main.temp_min %>°C, and the high is <%= weather.main.temp_max %>°C
             </p>
-            <p></p>
+            <% } else{ zoom = 3;%> 
+            <p><%= weather.weather[0].main %></p>
+            <% } %> 
           </div><div>
           <h4>City Map:
 
           </h4>
-          <div id="map" style="height: 300px; width: 700px;"></div>
+          <iframe src="http://maps.google.com/maps?q=<%= weather.coord.lat %>,<%= weather.coord.lon %>&z=<%= zoom %>&output=embed" height="300" width="700"></iframe>
+          <!-- <div id="map" style="height: 300px; width: 700px;"></div> -->
         </div>
         </div>
           <% } %>
@@ -75,16 +79,22 @@
               <p id="lat">
                 <%= weather.coord.lat %>
               </p>
+              <p id='size'><%= reminderItem.location.city %></p>
             </div>
     </li>
   </ul>
 
 </div>
-<script>
+
+<!-- <script>
   function initMap() {
     const coords = { lat: parseFloat(document.getElementById("lat").innerHTML), lng: parseFloat(document.getElementById("lon").innerHTML) };
+    let zoomin = 10
+    if (document.getElementById("size").innerHTML == ''){
+      zoomin = 3
+    }
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 10,
+      zoom: zoomin,
       center: coords,
     });
     const marker = new google.maps.Marker({
@@ -97,4 +107,4 @@
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6tUafSWRdbrY4QTcn7TW40HyZ6R1CMaY&callback=initMap&libraries=&v=weekly">
 
-  </script>
+  </script> -->

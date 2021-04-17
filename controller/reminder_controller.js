@@ -68,10 +68,23 @@ let remindersController = {
       return reminder.id == reminderToFind;
     });
     if (searchResult != undefined) {
+      if (searchResult.location.city == ''){
+        let x = {
+          weather:[
+            {
+              main:'You must specify a city in order to use the weather and map functions!'
+              }
+              ],
+              main:{temp:'',feels_like:'',temp_min:'',temp_max:''},
+              coord:{lon:-101.2996,lat:47.1164}
+              }
+              res.render("reminder/single-reminder", { reminderItem: searchResult, weather:x });
+      }
+      else {
       let x = getWeather(searchResult.location.city).then(function(result) {
         console.log(result)
         res.render("reminder/single-reminder", { reminderItem: searchResult, weather:result });
-      })
+      })}
     } else {
       res.render("reminder/index", { reminders: database[currentuser].reminders });
     }
