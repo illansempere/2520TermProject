@@ -9,22 +9,20 @@
       <h4>
         <%= reminderItem.description %>
       </h4>
-      <% String(reminderItem).replace(' ', ' <br>') %><h4> To do list: <br>
-          <ul>
-            <li>
-              <%= reminderItem.subtasks %>
-            </li>
-          </ul>
-        </h4>
+      <h4> To do list: <br></h4>
+        <ul>
+          <h5><%- reminderItem.subtasks %></h5>
+        </ul>
         <h4> Due Date:
-          <% if (reminderItem.date) { %>
+        <% if (reminderItem.date) { %>
             <%= reminderItem.date %>
               <% } else { %>
                 None
                 <% } %>
         </h4>
-        <h4> Tags: <%= reminderItem.tags %>
-        </h4>
+        <h4> Tags:  </h4>
+        <h5><%= reminderItem.tags %></h5>
+       
         <% if (reminderItem.locationbool=='true' ){ %>
           <h4>Location:</h4>
           <p>&emsp;Address: <%= reminderItem.location.address %>

@@ -7,7 +7,7 @@ let userModel = require("../models/userModel").userModel;
 const request = require('request-promise');
 // const {Client} = require("@googlemaps/google-maps-services-js");
 
-async function getWeather(city){
+async function getWeather(city='nanaimo'){
   var x;
   await request('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid=ad9c706cc1a14ac190bd66cb6220a124&units=metric', function (error, response, body) {
       x = JSON.parse(body)
@@ -78,6 +78,8 @@ let remindersController = {
   },
 
   create: (req, res) => {
+    let newtags = req.body.tags.replace(/-/g, " | ")
+    let newsub = req.body.subtasks.replace(/-/g, " <br> ")
     let currentuser = req.user.id
     let exists = false
     for (i in database) {
@@ -100,8 +102,8 @@ let remindersController = {
       title: req.body.title,
       date: req.body.date,
       description: req.body.description,
-      subtasks: req.body.subtasks,
-      tags: req.body.tags,
+      subtasks: newsub,
+      tags: newtags,
       locationbool: req.body.locationTF,
       location: tempdb,
       completed: false,
@@ -131,6 +133,8 @@ let remindersController = {
   },
 
   update: (req, res) => {
+    let newtags = req.body.tags.replace("-", " | ")
+    let newsub = req.body.subtasks.replace(/-/g, " <br> ")
     let currentuser = req.user.id
     let exists = false
     for (i in database) {
@@ -153,8 +157,8 @@ let remindersController = {
       title: req.body.title,
       date: req.body.date,
       description: req.body.description,
-      subtasks: req.body.subtasks,
-      tags: req.body.tags,
+      subtasks: newsub,
+      tags: newtags,
       locationbool: req.body.locationTF,
       location: tempdb,
       completed: req.body.completed,

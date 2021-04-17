@@ -37,3 +37,7 @@ April 16th, 2021
 Aidan Christopher:   
 -       finished the map api
 -       used the map api and the weather api accessible while viewing a single reminder 
+April 17th, 2021  
+Illan Sempere:   
+-       formatted the subtasks in a list
+-       formatted the tags to divide them clearly
