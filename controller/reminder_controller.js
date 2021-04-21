@@ -43,12 +43,32 @@ let remindersController = {
       AddUser(currentuser)
     }
     
+
     res.render("reminder/index", { reminders: database[currentuser].reminders });
     
   },
 
   new: (req, res) => {
-    res.render("reminder/create");
+
+    let vtodaydate = new Date()
+    let vdatenums = vtodaydate.toISOString().slice(0, 10)
+    let vmonths = ['','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    let vthisyear = vdatenums.slice(0,4)
+    let vthismonth = vmonths[parseInt(vdatenums.slice(5,7))]
+    let vthisday = parseInt(vdatenums.slice(8,10))
+    let vdaystring = vthismonth+' '+String(vthisday)+', '+vthisyear
+    // console.log('datenums:',vdatenums,'\nmonths:',vmonths,'\nthisyear:',vthisyear,'\nthismonth:',vthismonth,'\nthisday:',vthisday,'\nTODAY\'S DATE:',vdaystring)
+    let datedict = {
+      todaydate:vtodaydate,
+      datenums:vdatenums,
+      months:vmonths,
+      thisyear:vthisyear,
+      thismonth:vthismonth,
+      thisday:vthisday,
+      daystring:vdaystring
+    }
+
+    res.render("reminder/create", {today:datedict});
   },
 
   listOne: (req, res) => {
